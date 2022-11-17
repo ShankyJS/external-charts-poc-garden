@@ -1,0 +1,19 @@
+kind: Module
+description: Redis service for queueing votes before they are aggregated
+type: helm
+name: redis
+repo: https://charts.bitnami.com/bitnami
+chart: redis
+version: "16.13.1"
+valueFiles: # This works as expected, it detects that the value is locally available and overrides the default values.
+  - k8s/values.yaml
+
+---
+kind: Module
+description: Using a Github chart and replacing a value with values files.
+type: helm
+name: extra
+repositoryUrl: "git@github.com:prometheus-community/helm-charts.git#main"
+chartPath: "./charts/prometheus"
+valueFiles: # This does not work, once the chart is downloaded with the github repository, garden expects that my custom value file is available in the chart folder, as I'm using a repository that I don't own garden shouldn't expect that our values files live there...
+  - k8s/values-prometheus.yaml

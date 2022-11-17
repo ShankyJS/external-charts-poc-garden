@@ -1,0 +1,6 @@
+kind: Project
+name: external-charts-poc-garden
+environments:
+  - name: default
+providers:
+  - name: local-kubernetes
